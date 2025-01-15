@@ -1,9 +1,21 @@
+import { useState } from "react";
 import Contador from "./components/Contador";
 import ContadorDoble from "./components/ContadorDoble";
-
+import Hijo from "./components/parametros/hijo";
+import Padre from "./components/parametros/padre";
+const initialStateInfo = { nombre: "Fernando", edad: 15, isAdmin: false };
 const App = () => {
+  const [info, setInfo] = useState(initialStateInfo);
+  const handleClickEdad = () => {
+    setInfo((prevInfo) => ({ ...prevInfo, edad: prevInfo.edad + 1 }));
+  };
   return (
     <>
+      <Padre info={info} setInfo={setInfo} {...handleClickEdad}>
+        <h1>Hola mundo</h1>
+        <Hijo info={info} handleClickEdad={handleClickEdad} />
+      </Padre>
+      <h1>Edad: {info.edad}</h1>
       <div className="min-h-screen bg-gray-100 p-8">
         <h1 className="text-3xl font-bold text-center mb-8">
           Ejemplos de componenetes y estados en React

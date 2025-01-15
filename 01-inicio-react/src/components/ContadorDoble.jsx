@@ -8,6 +8,7 @@ const ContadorDoble = () => {
     Maria: 0,
   });
   const [media, setMedia] = useState();
+  // Crear una etiqueta p que me haga la media aritmetica del numero de likes que tienen entre todos
   //   Visto en https://stackoverflow.com/questions/56247433/how-to-use-setstate-callback-on-react-hooks
   useEffect(() => {
     setMedia(
@@ -86,7 +87,5 @@ const ContadorDoble = () => {
     </div>
   );
 };
-
-// Crear una etiqueta p que me haga la media aritmetica del numero de likes que tienen entre todos
 
 export default ContadorDoble;
