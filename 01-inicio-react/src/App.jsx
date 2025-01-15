@@ -3,6 +3,8 @@ import Contador from "./components/Contador";
 import ContadorDoble from "./components/ContadorDoble";
 import Hijo from "./components/parametros/hijo";
 import Padre from "./components/parametros/padre";
+import Saludo from "./components/useEffect/Saludo";
+import ProductList from "./components/useEffectFetching/ProductList";
 const initialStateInfo = { nombre: "Fernando", edad: 15, isAdmin: false };
 const App = () => {
   const [info, setInfo] = useState(initialStateInfo);
@@ -11,7 +13,7 @@ const App = () => {
   };
   return (
     <>
-      <Padre info={info} setInfo={setInfo} {...handleClickEdad}>
+      {/* <Padre info={info} setInfo={setInfo} {...handleClickEdad}>
         <h1>Hola mundo</h1>
         <Hijo info={info} handleClickEdad={handleClickEdad} />
       </Padre>
@@ -32,7 +34,10 @@ const App = () => {
           </h2>
           <ContadorDoble />
         </div>
-      </div>
+      </div> */}
+
+      <Saludo />
+      <ProductList />
     </>
   );
 };

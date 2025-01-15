@@ -1,0 +1,72 @@
+[
+  {
+    "id": 1,
+    "title": "Mastering Python",
+    "price": 39.99,
+    "tags": ["Python", "Programming", "Machine Learning"],
+    "img": "https://example.com/images/mastering-python.jpg"
+  },
+  {
+    "id": 2,
+    "title": "JavaScript for Beginners",
+    "price": 29.99,
+    "tags": ["JavaScript", "Web Development", "Programming"],
+    "img": "https://example.com/images/javascript-beginners.jpg"
+  },
+  {
+    "id": 3,
+    "title": "The Java Handbook",
+    "price": 34.99,
+    "tags": ["Java", "Backend", "OOP"],
+    "img": "https://example.com/images/java-handbook.jpg"
+  },
+  {
+    "id": 4,
+    "title": "C++ Crash Course",
+    "price": 24.99,
+    "tags": ["C++", "Game Development", "Programming"],
+    "img": "https://example.com/images/cpp-crash-course.jpg"
+  },
+  {
+    "id": 5,
+    "title": "Ruby on Rails Guide",
+    "price": 27.99,
+    "tags": ["Ruby", "Web Development", "Frameworks"],
+    "img": "https://example.com/images/ruby-on-rails.jpg"
+  },
+  {
+    "id": 6,
+    "title": "Full-Stack Development with Node.js",
+    "price": 39.99,
+    "tags": ["JavaScript", "Node.js", "Full-Stack"],
+    "img": "https://example.com/images/nodejs-fullstack.jpg"
+  },
+  {
+    "id": 7,
+    "title": "Kotlin for Android Developers",
+    "price": 32.99,
+    "tags": ["Kotlin", "Mobile Development", "Android"],
+    "img": "https://example.com/images/kotlin-android.jpg"
+  },
+  {
+    "id": 8,
+    "title": "Swift Essentials",
+    "price": 35.99,
+    "tags": ["Swift", "iOS", "Mobile Development"],
+    "img": "https://example.com/images/swift-essentials.jpg"
+  },
+  {
+    "id": 9,
+    "title": "PHP and MySQL",
+    "price": 28.99,
+    "tags": ["PHP", "MySQL", "Web Development"],
+    "img": "https://example.com/images/php-mysql.jpg"
+  },
+  {
+    "id": 10,
+    "title": "Go Programming Cookbook",
+    "price": 37.99,
+    "tags": ["Go", "Backend", "Programming"],
+    "img": "https://example.com/images/go-cookbook.jpg"
+  }
+]
