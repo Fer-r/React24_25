@@ -8,14 +8,14 @@ const TaskForm = () => {
   const [taskName, setTaskName] = useState("");
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(taskName.trim()){
-
+    if (taskName.trim()) {
+      addTask({
+        id: Date.now(),
+        title: taskName,
+        completed: false,
+      });
+      e.target.value = "";
     }
-    addTask({
-      id: Date.now(),
-      title: taskName,
-      completed: false,
-    });
   };
   return (
     <form

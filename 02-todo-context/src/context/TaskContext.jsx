@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 /**
  * Una tarea tine que tener
  * {
@@ -19,32 +19,38 @@ export const TaskProvidder = ({ children }) => {
   // marcar como completada
   // No olvidar que las tareas han de estar guardadas en el localStorage (para este ejercicio)
   // hooks
-  const [task, setTask] = useState(() => {
+  const [tasks, setTasks] = useState(() => {
     const savedTask = localStorage.getItem("task");
     return savedTask ? JSON.parse(savedTask) : [];
   });
+  useEffect(() => {
+    localStorage.setItem("task", JSON.stringify(tasks));
+  }, [tasks]);
 
   // functions
 
   const addTask = (task) => {
-    setTask((prevTasks) => {
-      [...prevTasks, task];
+    setTasks((prevTasks) => {
+      return [...prevTasks, task];
     });
   };
   const removeTask = (taskId) => {
-    setTask((prevTasks) => prevTasks.filter((task) => taskId != task.id));
+    setTasks((prevTasks) => prevTasks.filter((task) => taskId != task.id));
   };
   const removeTask2 = (taskId) => {
+    setTasks((prevTasks) => prevTasks.splice(prevTasks.indexOf(taskId), 1));
+  };
+  const removeTask3 = (taskId) => {
     // Hacer remove pero con find en vez de filter
-    setTask((prevTasks) => prevTasks.splice(prevTasks.indexOf(taskId), 1));
+    // setTasks((prevTasks)=>)
   };
   const editTask = (taskId, Editedtask) => {
-    setTask((prevTasks) =>
+    setTasks((prevTasks) =>
       prevTasks.map((task) => (task.id == taskId ? Editedtask : task))
     );
   };
   const toggleTaskCompletion = (taskId) => {
-    setTask((prevTasks) =>
+    setTasks((prevTasks) =>
       prevTasks.map((task) =>
         task.id == taskId ? { ...task, completed: !completed } : task
       )
@@ -53,7 +59,7 @@ export const TaskProvidder = ({ children }) => {
   return (
     <TaskContext.Provider
       value={{
-        tasks: task,
+        tasks,
         addTask,
         removeTask,
         editTask,
