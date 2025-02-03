@@ -1,10 +1,12 @@
 import React, { useContext } from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
+import { usePokemon } from "../context/PokemonContext";
 
 const PokemonDetail = () => {
   const pokemon = useLoaderData();
   // hook para navegar entre rutas (navegacion programatica)
   const navigate = useNavigate();
+  const { addToFavorites } = usePokemon();
 
   return (
     <div className="container mx-auto p-4">
@@ -37,18 +39,22 @@ const PokemonDetail = () => {
           </div>
           <div>
             <h2 className="text-xl font-semibold mb-2">Tipos</h2>
-            {pokemon.types.map((type) => (
-              <p key={type.slot} className="capitalize">
-                {type.type.name}
-              </p>
-            ))}
+            <div>
+              {pokemon.types.map((type) => (
+                <p key={type.type.name} className="capitalize">
+                  {type.type.name}
+                </p>
+              ))}
+            </div>
           </div>
-        <button
-          className="bg-yellow-500 text-white px-4 py-2 mt-4 rounded font-bold hover:bg-slate-900 "
-          onClick={console.log(`${pokemon.name} añadido a favoritos`)}
-        >
-          Añadir a favoritos
-        </button>
+          <button
+            className="bg-yellow-500 text-white px-4 py-2 mt-4 rounded font-bold hover:bg-slate-900 "
+            onClick={() => {
+              addToFavorites(pokemon);
+            }}
+          >
+            Añadir a favoritos
+          </button>
         </div>
       </div>
     </div>

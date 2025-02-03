@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ROUTES } from "../routes/paths";
+import { usePokemon } from "../context/PokemonContext";
+import Spinner from "../components/Spinner";
 
 const Home = () => {
   const [pokemons, setPokemons] = useState([]);
@@ -8,6 +10,7 @@ const Home = () => {
   useEffect(() => {
     fetchPokemons();
   }, []);
+  const { addToFavorites } = usePokemon();
   const fetchPokemons = async () => {
     try {
       const response = await fetch(
@@ -31,7 +34,11 @@ const Home = () => {
       setLoading(false);
     }
   };
-
+  if (loading) {
+    <div>
+      <Spinner />
+    </div>;
+  }
   return (
     <>
       <div className="container mx-auto p-4">
@@ -46,15 +53,20 @@ const Home = () => {
             >
               <div className="relative group">
                 <img
-                  className="mx-auto"
-                  src={pokemon.sprites.front_default}
+                  className="mx-auto w-16"
+                  src={pokemon.sprites.other.dream_world.front_default}
                   alt={pokemon.name}
                 />
                 <h2 className="text-xl font-bold text-center mt-4">
                   {pokemon.name}
                 </h2>
                 <div className="flex justify-center space-x-2 mt-4">
-                  <button className="bg-yellow-500 text-white px-4 py-2 rounded font-bold hover:bg-slate-900 ">
+                  <button
+                    className="bg-yellow-500 text-white px-4 py-2 rounded font-bold hover:bg-slate-900 "
+                    onClick={() => {
+                      addToFavorites(pokemon);
+                    }}
+                  >
                     Añadir a favoritos
                   </button>
                   <Link
