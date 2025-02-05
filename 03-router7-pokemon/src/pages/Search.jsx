@@ -2,50 +2,54 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
-
+import PokemonCard from "../components/PokemonCard";
+F;
 const Search = () => {
-  const fetchedUrls = [];
+  const [allPokemonUrls, setAllPokemonUrls] = useState([]);
   const [pokemons, setPokemons] = useState([]);
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
-  // useEffect(() => {
-  //   fetchUrls();
-  // }, []);
   useEffect(() => {
-    if (!fetchedUrls.length) {
-      console.log("jhdsgklfhkldsgfhkl")
-      fetchUrls();
-    }
-    async function pokemonDetails() {
-      console.log(
-        search
-          ? fetchedUrls.filter((pokemon) => pokemon.name.includes(search))
-          : fetchedUrls
-      );
-      return await Promise.all(
-        (search
-          ? await fetchUrls().filter((pokemon) => pokemon.name.includes(search))
-          : await fetchUrls()
-        )
-          .slice(0, 20)
-          .map(async (pokemon) => {
+    fetchUrls();
+  }, []);
+  useEffect(() => {
+    async function fetchPokemonData() {
+      try {
+        if (allPokemonUrls.length === 0) {
+          return;
+        }
+        // First fetch all URLs
+        const filteredUrls = allPokemonUrls
+          .filter((pokemon) => (search ? pokemon.name.includes(search) : true))
+          .slice(0, 21);
+
+        // Make concurrent requests for the filtered URLs
+        const pokemonData = await Promise.all(
+          filteredUrls.map(async (pokemon) => {
             const res = await fetch(pokemon.url);
             return res.json();
           })
-      );
-    }
+        );
 
-    setPokemons(pokemonDetails());
-  }, [search]);
+        // Filter out any failed requests
+        setPokemons(pokemonData);
+      } catch (error) {
+        console.error("Error fetching Pokemon data:", error);
+        throw error;
+      }
+    }
+    fetchPokemonData();
+  }, [search, allPokemonUrls]);
 
   const fetchUrls = async () => {
     setIsLoading(true);
     try {
       // Terminar el buscar en tiempo real
       // fetch todos los pokemons y on change hacer filter fetchedPokemons
-      const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=9999");
-      ("https://pokeapi.co/api/v2/pokemon?limit=9999");
+      const response = await fetch(
+        "https://pokeapi.co/api/v2/pokemon?limit=9999"
+      );
       if (!response.ok) {
         toast.error("Failed to fetch pokemons", {
           style: {
@@ -57,8 +61,9 @@ const Search = () => {
         });
         return;
       }
-      fetchedUrls = await response.json().results;
-      // navigate(`/search/${search.toLowerCase()}`);
+      const data = await response.json();
+      setAllPokemonUrls(data.results);
+      return allPokemonUrls;
     } catch (error) {
       toast.error("Failed to fetch pokemons", {
         style: {
@@ -70,22 +75,12 @@ const Search = () => {
       });
     } finally {
       setIsLoading(false);
-      // e.target.value = "";
     }
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    // if (search) {
-    //   toast.error("Error al buscar el pokemon", {
-    //     style: {
-    //       background: "#fee2e2",
-    //       color: "white",
-    //       border: "2px solid red",
-    //     },
-    //     icon: "❌",
-    //   });
-    // }
   };
   return (
     <div className="container mx-auto p-4">
@@ -110,6 +105,11 @@ const Search = () => {
           Buscar
         </button>
       </form>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {pokemons.map((pokemon) => (
+          <PokemonCard key={pokemon.name} pokemon={pokemon} />
+        ))}
+      </div>
     </div>
   );
 };
