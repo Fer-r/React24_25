@@ -3,8 +3,8 @@ import RootLayout from "../layouts/RootLayout";
 import ErrorPage from "./../pages/ErrorPage";
 import Home from "../pages/Home";
 import MovieDetail from "../pages/MovieDetail";
-import MovieList from './../pages/MovieList';
-import Search from './../pages/Search';
+import MovieList from "./../pages/MovieList";
+import Search from "./../pages/Search";
 import Favorites from "../pages/Favorites";
 import Reviews from "../pages/Reviews";
 export const router = createBrowserRouter([
