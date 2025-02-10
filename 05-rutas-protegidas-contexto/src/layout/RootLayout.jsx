@@ -3,8 +3,9 @@ import { Outlet } from "react-router-dom";
 const RootLayout = () => {
   return (
     <>
-      <div>Root layout</div>
+      <div className="min-h-1 bg-gray-100">
       <Outlet />
+      </div>
     </>
   );
 };

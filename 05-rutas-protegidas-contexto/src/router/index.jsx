@@ -4,12 +4,16 @@ import Login from "../pages/Login";
 import AdminLayout from "../layout/AdminLayout";
 import ProtectedRoute from "../components/ProtectedRoute";
 import Dashboard from "./../pages/Dashboard";
+import Users from "./../pages/Users";
+import Products from "./../pages/Products";
+import Settings from "./../pages/Settings";
+import ErrorPage from './../pages/ErrorPage';
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout />,
-    errorElement: <errorElement />,
+    errorElement: <ErrorPage />,
     children: [
       {
         index: true,
@@ -25,23 +29,19 @@ export const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <Dashboard/>,
+            element: <Dashboard />,
           },
           {
-            path:"users",
-            element: <Dashboard/>,
+            path: "users",
+            element: <Users />,
           },
           {
-            path:"users",
-            element: <Dashboard/>,
+            path: "products",
+            element: <Products />,
           },
           {
-            path:"users",
-            element: <Dashboard/>,
-          },
-          {
-            path:"users",
-            element: <Dashboard/>,
+            path: "Settings",
+            element: <Settings />,
           },
         ],
       },
