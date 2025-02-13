@@ -18,7 +18,7 @@ export const fetchFromAPI = async (endpoint, options = {}) => {
     if (!response.ok) {
       throw new Error("Error en la peticion");
     }
-    const data= await response.json();
+    const data = await response.json();
     return data;
   } catch (error) {
     console.error(error);
@@ -26,8 +26,8 @@ export const fetchFromAPI = async (endpoint, options = {}) => {
   }
 };
 
-export const getPopularMovies = async () => {
-  return await fetchFromAPI("/movie/popular");
+export const getPopularMovies = async (page) => {
+  return await fetchFromAPI("/movie/popular", { page });
 };
 export const getMovieDetail = async (id) => {
   return await fetchFromAPI(`/movie/${id}`);
@@ -36,7 +36,6 @@ export const getMovieVideos = async (id) => {
   return await fetchFromAPI(`/movie/${id}/videos`);
 };
 
-export const getImageURL=(path ,size=SIZE.POSTER)=>{
-  return `${BASE_IMAGE_URL}/${size}${path}`
-
-}
+export const getImageURL = (path, size = SIZE.POSTER) => {
+  return `${BASE_IMAGE_URL}/${size}${path}`;
+};
