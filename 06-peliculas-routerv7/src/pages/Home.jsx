@@ -3,7 +3,7 @@ import { useFetch } from "../hooks/useFetch";
 import { getPopularMovies } from "../services/tmdb";
 import { Link } from "react-router-dom";
 import MovieCard from "./../components/MovieCard";
-import PacmanLoader from './../../node_modules/react-spinners/PacmanLoader.d';
+import { PacmanLoader } from 'react-spinners';
 
 const Home = () => {
   const [page, setPage] = useState(1);
