@@ -3,7 +3,6 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import PokemonCard from "../components/PokemonCard";
-F;
 const Search = () => {
   const [allPokemonUrls, setAllPokemonUrls] = useState([]);
   const [pokemons, setPokemons] = useState([]);
