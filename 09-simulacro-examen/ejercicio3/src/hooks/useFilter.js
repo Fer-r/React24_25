@@ -7,9 +7,9 @@ export const useFilter = () => {
   const [formData, setFormData] = useState({
     search: "",
     // Stock tiene que ser mayor que si es distinto de 0
-    stock: 0,
+    stock: "",
     // El precio tiene que ser menor que el filtro si el filtro es distinto de 0
-    price: 0,
+    price: "",
   });
   useEffect(() => {
     formData.search != ""
